@@ -20,7 +20,7 @@ local mx, my        		= getScreenResolution()
 local result 				= ''
 local fe_locked 			= false
 
--->>| Ñategories: Ini and Config |<<-- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG 
+-->>| Ð¡ategories: Ini and Config |<<-- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG 
 local ini = inicfg.load({
     --| Personal Info |--
     account = {
@@ -57,7 +57,7 @@ local ini = inicfg.load({
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
--->>| Ñategories: Local |<<--
+-->>| Ð¡ategories: Local |<<--
  --| Personal Information |--
   local nick              	= imgui.ImBuffer(tostring(ini.account.nick), 256)
   local password          	= imgui.ImBuffer(tostring(ini.account.password), 256)
@@ -90,47 +90,47 @@ arrows = {0, 1, 2, 3, 4}
 cheat = {}
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 
--->>| Ñategories: News |<<--      SHABLON: --| Version: *.* |--
+-->>| Ð¡ategories: News |<<--      SHABLON: --| Version: *.* |--
  --| Version: 1.4 |--
   local upd5 = [[
-  - Äîáàâëåí êàëüêóëÿòîð, êîìàíäà /calc.]]
+  - Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½ ÐºÐ°Ð»ÑŒÐºÑƒÐ»ÑÑ‚Ð¾Ñ€, ÐºÐ¾Ð¼Ð°Ð½Ð´Ð° /calc.]]
 
  --| Version: 1.3 |--
   local upd4 = [[
-  - Òåïåðü àâòî çàõîä â àäìèíêó ñàì àâòîðèçóåòñÿ, â êàòåãîðèè [Àêêàóíò].
-  - Äîáàâëåíû ñïèñîê â êàòåãîðèè [×èòû]:
- 	• AirBreak,
- 	• FarChat,
- 	• GodMode,
- 	• InfinityGodMode,
- 	• SpeedHack,
- 	• NoFall,
-    • CamHack.
-  - Âñå òåêñòû ïðåâðàòèëè â ñïîéëåð íà êàòåãîðèè [Íîâîñòè].
-  - Èçìåíåíû íàïðàâëåíèå è íàçâàíèå, à òàêæå îïèñàíèå.
-  - Èñïðàâëåíèå áàãîâ (Auto-ïàðîëü, Auto-alogin).
-  - Äîáàâëåíû çíà÷îê (?) - îïèñàíèå ñêðèïòà è äðóãèå, à òàêæå àêòèâèàöèÿ.]] -- • ClickWarp,
+  - Ð¢ÐµÐ¿ÐµÑ€ÑŒ Ð°Ð²Ñ‚Ð¾ Ð·Ð°Ñ…Ð¾Ð´ Ð² Ð°Ð´Ð¼Ð¸Ð½ÐºÑƒ ÑÐ°Ð¼ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·ÑƒÐµÑ‚ÑÑ, Ð² ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ [ÐÐºÐºÐ°ÑƒÐ½Ñ‚].
+  - Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹ ÑÐ¿Ð¸ÑÐ¾Ðº Ð² ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ [Ð§Ð¸Ñ‚Ñ‹]:
+ 	â€¢ AirBreak,
+ 	â€¢ FarChat,
+ 	â€¢ GodMode,
+ 	â€¢ InfinityGodMode,
+ 	â€¢ SpeedHack,
+ 	â€¢ NoFall,
+    â€¢ CamHack.
+  - Ð’ÑÐµ Ñ‚ÐµÐºÑÑ‚Ñ‹ Ð¿Ñ€ÐµÐ²Ñ€Ð°Ñ‚Ð¸Ð»Ð¸ Ð² ÑÐ¿Ð¾Ð¹Ð»ÐµÑ€ Ð½Ð° ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ [ÐÐ¾Ð²Ð¾ÑÑ‚Ð¸].
+  - Ð˜Ð·Ð¼ÐµÐ½ÐµÐ½Ñ‹ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¸ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ, Ð° Ñ‚Ð°ÐºÐ¶Ðµ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ðµ.
+  - Ð˜ÑÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð±Ð°Ð³Ð¾Ð² (Auto-Ð¿Ð°Ñ€Ð¾Ð»ÑŒ, Auto-alogin).
+  - Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹ Ð·Ð½Ð°Ñ‡Ð¾Ðº (?) - Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ðµ ÑÐºÑ€Ð¸Ð¿Ñ‚Ð° Ð¸ Ð´Ñ€ÑƒÐ³Ð¸Ðµ, Ð° Ñ‚Ð°ÐºÐ¶Ðµ Ð°ÐºÑ‚Ð¸Ð²Ð¸Ð°Ñ†Ð¸Ñ.]] -- â€¢ ClickWarp,
 
  --| Version: 1.2 |--
   local upd3 = [[
-  - Äîáàâëåí ÷èò â êàòåãîðèè [×èòû]:
-    • WallHack.
-  - Äîáàâëåí êíîïêà 'Áàã-ðåïîðò è ïðåäëîæåíèå [VK]']]
+  - Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½ Ñ‡Ð¸Ñ‚ Ð² ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ [Ð§Ð¸Ñ‚Ñ‹]:
+    â€¢ WallHack.
+  - Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½ ÐºÐ½Ð¾Ð¿ÐºÐ° 'Ð‘Ð°Ð³-Ñ€ÐµÐ¿Ð¾Ñ€Ñ‚ Ð¸ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ [VK]']]
 
  --| Version: 1.1 |--
   local upd2 = [[
-  - Äîáàâëåíû êíîïêè â êàòåãîðèè [Àâòîðèçàöèÿ]:
-    • Àâòî-ââîä ïàðîëÿ,
-    • Àâòî çàõîä â àäìèíêó,
-    • Ñòàðòîâîå ñîîáùåíèå.
-  - Èñïðàâëåíèå áàãîâ
-  ! Ñêîðî áóäóò äîáàâëåíû '×èòû'
+  - Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ð² ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ [ÐÐ²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ]:
+    â€¢ ÐÐ²Ñ‚Ð¾-Ð²Ð²Ð¾Ð´ Ð¿Ð°Ñ€Ð¾Ð»Ñ,
+    â€¢ ÐÐ²Ñ‚Ð¾ Ð·Ð°Ñ…Ð¾Ð´ Ð² Ð°Ð´Ð¼Ð¸Ð½ÐºÑƒ,
+    â€¢ Ð¡Ñ‚Ð°Ñ€Ñ‚Ð¾Ð²Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ.
+  - Ð˜ÑÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð±Ð°Ð³Ð¾Ð²
+  ! Ð¡ÐºÐ¾Ñ€Ð¾ Ð±ÑƒÐ´ÑƒÑ‚ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹ 'Ð§Ð¸Ñ‚Ñ‹'
     / WallHack,
     / AirBreak.]]
  
  --| Version: 1.0 |--
   local upd1 = [[
-  - Äåíü ñîçäàíèÿ ñêðèïòà, ïåðâûå òåñòû!]]
+  - Ð”ÐµÐ½ÑŒ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ ÑÐºÑ€Ð¸Ð¿Ñ‚Ð°, Ð¿ÐµÑ€Ð²Ñ‹Ðµ Ñ‚ÐµÑÑ‚Ñ‹!]]
 
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 --| ImGui Color |--
@@ -143,9 +143,9 @@ cheat = {}
 --     a.WindowTitleAlign=imgui.ImVec2(0.5,0.5)
 --     b[c.WindowBg]=d(0.13,0.13,0.13,1.00)
 -- end
--- apply_custom_style() -- Çàêðàøèâàíèå
+-- apply_custom_style() -- Ð—Ð°ÐºÑ€Ð°ÑˆÐ¸Ð²Ð°Ð½Ð¸Ðµ
 
--->>| Ñategories: Main |<<--
+-->>| Ð¡ategories: Main |<<--
 function main()
 	if not isSampfuncsLoaded() or not isCleoLoaded() or not isSampLoaded() then
 		return
@@ -159,11 +159,11 @@ function main()
 		wait(1000)
 	end
 
-	-->>| Ñategories: AutoLogin |<<--
+	-->>| Ð¡ategories: AutoLogin |<<--
 	if ini.account.startmsg then
-        sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Ñêðèïò óñïåøíî çàãðóæåí. Âåðñèÿ: {fcfa1a}'..thisScript().version..'{FFFFFF}.', -1)
-        sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Àâòîð - {fcfa1a}kyrtion{FFFFFF}. Âûêëþ÷èòü äàííîå ñîîáùåíèå ìîæíî â {fcfa1a}/alite{FFFFFF}.', -1)
-        --sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Ñêðèïòû óñïåøíû çàãðóæåíû! Àâòîð: kyrtion. Âåðñèÿ: 1', -1)
+        sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Ð¡ÐºÑ€Ð¸Ð¿Ñ‚ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½. Ð’ÐµÑ€ÑÐ¸Ñ: {fcfa1a}'..thisScript().version..'{FFFFFF}.', -1)
+        sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: ÐÐ²Ñ‚Ð¾Ñ€ - {fcfa1a}kyrtion{FFFFFF}. Ð’Ñ‹ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑŒ Ð´Ð°Ð½Ð½Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¼Ð¾Ð¶Ð½Ð¾ Ð² {fcfa1a}/alite{FFFFFF}.', -1)
+        --sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Ð¡ÐºÑ€Ð¸Ð¿Ñ‚Ñ‹ ÑƒÑÐ¿ÐµÑˆÐ½Ñ‹ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ñ‹! ÐÐ²Ñ‚Ð¾Ñ€: kyrtion. Ð’ÐµÑ€ÑÐ¸Ñ: 1', -1)
     end
     -- apply_custom_style() -- Change color and thems
 
@@ -525,7 +525,7 @@ function main()
 end
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 
--->>| Ñategories: ImGui |<<--
+-->>| Ð¡ategories: ImGui |<<--
 function imgui.OnDrawFrame()
 	
 	--| Window: own |--
@@ -538,33 +538,33 @@ function imgui.OnDrawFrame()
 		
 		
 		-->>| Spoiler: Settings |<<--
-        if imgui.CollapsingHeader(u8'Íàñòðîéêè') then
+        if imgui.CollapsingHeader(u8'ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸') then
 
 
             -->>| Spoiler: AutoLogins |<<--
-			if imgui.CollapsingHeader(u8'Àâòîðèçàöèÿ') then
-				-- imgui.Text(u8'Âàø íèê')
-				ShowHelpMarker('< Ïðèñîåäèíåíèå íà ñåðâåðå âûäà¸òñÿ ïåðâûé äèàëîã äëÿ ïàðîëÿ îò àêêàóíòà')
-				imgui.Text(u8'Ïàðîëü îò àêêàóíòà')
+			if imgui.CollapsingHeader(u8'ÐÐ²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ') then
+				-- imgui.Text(u8'Ð’Ð°Ñˆ Ð½Ð¸Ðº')
+				ShowHelpMarker('< ÐŸÑ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ Ð²Ñ‹Ð´Ð°Ñ‘Ñ‚ÑÑ Ð¿ÐµÑ€Ð²Ñ‹Ð¹ Ð´Ð¸Ð°Ð»Ð¾Ð³ Ð´Ð»Ñ Ð¿Ð°Ñ€Ð¾Ð»Ñ Ð¾Ñ‚ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ð°')
+				imgui.Text(u8'ÐŸÐ°Ñ€Ð¾Ð»ÑŒ Ð¾Ñ‚ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ð°')
 				imgui.SameLine()
 				imgui.InputText('##pass1', password, imgui.InputTextFlags.Password)
 
-				ShowHelpMarker('< Ñ ïîìîùüþ êîìàíäîé /alogin âûäà¸òñÿ äèàëîã äëÿ ïàðîëÿ îò àäìèíêè')
-				imgui.Text(u8'Ïàðîëü îò àäìèíêè')
+				ShowHelpMarker('< Ð¡ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð¾Ð¹ /alogin Ð²Ñ‹Ð´Ð°Ñ‘Ñ‚ÑÑ Ð´Ð¸Ð°Ð»Ð¾Ð³ Ð´Ð»Ñ Ð¿Ð°Ñ€Ð¾Ð»Ñ Ð¾Ñ‚ Ð°Ð´Ð¼Ð¸Ð½ÐºÐ¸')
+				imgui.Text(u8'ÐŸÐ°Ñ€Ð¾Ð»ÑŒ Ð¾Ñ‚ Ð°Ð´Ð¼Ð¸Ð½ÐºÐ¸')
 				imgui.SameLine(0,10)
 				imgui.InputText('##alogin1', alogin, imgui.InputTextFlags.Password)
 
-				ShowHelpMarker('< Àâòîìàòè÷åñêîå ââîäèò ïàðîëü îò àêêàóíòà') --| Dialog ID = 0 |--
-				imgui.Checkbox(u8'Àâòî-ââîä ïàðîëÿ îò àêêàóíòà', autoPass)
+				ShowHelpMarker('< ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð²Ð²Ð¾Ð´Ð¸Ñ‚ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ Ð¾Ñ‚ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ð°') --| Dialog ID = 0 |--
+				imgui.Checkbox(u8'ÐÐ²Ñ‚Ð¾-Ð²Ð²Ð¾Ð´ Ð¿Ð°Ñ€Ð¾Ð»Ñ Ð¾Ñ‚ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ð°', autoPass)
 
-				ShowHelpMarker('< Àâòîìàòè÷åñêîå ââîäèò ïàðîëü îò àäìèíêè') --| Dialog ID = 87 |--
-				imgui.Checkbox(u8'Àâòî çàõîä â àäìèíêó', autoAlogin)
+				ShowHelpMarker('< ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð²Ð²Ð¾Ð´Ð¸Ñ‚ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ Ð¾Ñ‚ Ð°Ð´Ð¼Ð¸Ð½ÐºÐ¸') --| Dialog ID = 87 |--
+				imgui.Checkbox(u8'ÐÐ²Ñ‚Ð¾ Ð·Ð°Ñ…Ð¾Ð´ Ð² Ð°Ð´Ð¼Ð¸Ð½ÐºÑƒ', autoAlogin)
 				
-				ShowHelpMarker('< Êàæäûé çàïóñê ñêðèïòà âûäà¸òñÿ ñîîáùåíèå, ÷òî âû çàïóñòèëè + âåðñèÿ')
-				imgui.Checkbox(u8'Ñòàðòîâîå ñîîáùåíèå', startmsg)
+				ShowHelpMarker('< ÐšÐ°Ð¶Ð´Ñ‹Ð¹ Ð·Ð°Ð¿ÑƒÑÐº ÑÐºÑ€Ð¸Ð¿Ñ‚Ð° Ð²Ñ‹Ð´Ð°Ñ‘Ñ‚ÑÑ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ, Ñ‡Ñ‚Ð¾ Ð²Ñ‹ Ð·Ð°Ð¿ÑƒÑÑ‚Ð¸Ð»Ð¸ + Ð²ÐµÑ€ÑÐ¸Ñ')
+				imgui.Checkbox(u8'Ð¡Ñ‚Ð°Ñ€Ñ‚Ð¾Ð²Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ', startmsg)
 
                 --| Button: Save |--
-                if imgui.Button(u8'Ñîõðàíèòü') then
+                if imgui.Button(u8'Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ') then
                     ini.account.password    = password.v
                     ini.account.autoPass    = autoPass.v
                     ini.account.alogin      = alogin.v
@@ -572,7 +572,7 @@ function imgui.OnDrawFrame()
                     -- ini.account.pin         = pin.v
                     ini.account.startmsg    = startmsg.v
                     inicfg.save(ini, 'adminlite')
-                    sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Óñïåøíû ñîõðàíåíû!', -1)
+                    sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Ð£ÑÐ¿ÐµÑˆÐ½Ñ‹ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ñ‹!', -1)
 				end
             end
         end
@@ -580,18 +580,18 @@ function imgui.OnDrawFrame()
 
 
      -->>| Spoiler: Cheats |<<--
-		if imgui.CollapsingHeader(u8'×èòû') then
+		if imgui.CollapsingHeader(u8'Ð§Ð¸Ñ‚Ñ‹') then
 			
 
 
 			--| Cheat: AirBreak |--
-			ShowHelpMarker([[< ÀèðÁðåéê [ÀÁ]
+			ShowHelpMarker([[< ÐÐ¸Ñ€Ð‘Ñ€ÐµÐ¹Ðº [ÐÐ‘]
 
-	 [?] Ïîë¸ò ñêâîçü, è íà ñòåíå â ëþáîì âèäå`
-	 [+] Ðàáîòàåò íà ìàøèíå è ïåðñîíàæ
-	 [#] Àêòèâàöèÿ: RShift (ïðàâûé Shift)
-	 [#] Óïðàâëåíèå:
-	 [#] WASD, ñòðåëêè ââåðõ/âíèç -- Äâèæåíèå]])
+	 [?] ÐŸÐ¾Ð»Ñ‘Ñ‚ ÑÐºÐ²Ð¾Ð·ÑŒ, Ð¸ Ð½Ð° ÑÑ‚ÐµÐ½Ðµ Ð² Ð»ÑŽÐ±Ð¾Ð¼ Ð²Ð¸Ð´Ðµ`
+	 [+] Ð Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ðµ Ð¸ Ð¿ÐµÑ€ÑÐ¾Ð½Ð°Ð¶
+	 [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: RShift (Ð¿Ñ€Ð°Ð²Ñ‹Ð¹ Shift)
+	 [#] Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ:
+	 [#] WASD, ÑÑ‚Ñ€ÐµÐ»ÐºÐ¸ Ð²Ð²ÐµÑ€Ñ…/Ð²Ð½Ð¸Ð· -- Ð”Ð²Ð¸Ð¶ÐµÐ½Ð¸Ðµ]])
 			if imgui.Checkbox(u8'AirBreak', AirBreak) then
 				ini.cheat.airbreak = AirBreak.v
                 inicfg.save(ini, 'adminlite')
@@ -600,11 +600,11 @@ function imgui.OnDrawFrame()
 
 
 			--| Cheat: FarChat |--
-			ShowHelpMarker([[< Äàëüíèé×àò [Ä×]
+			ShowHelpMarker([[< Ð”Ð°Ð»ÑŒÐ½Ð¸Ð¹Ð§Ð°Ñ‚ [Ð”Ð§]
 
-	 [?] Ïîêàçûâàåò ó âñåõ òåêñò íàä ãîëîâîé ó èãðîêàìè
-	 [+] Òàêæå ðàáîòàåò CamHack
-	 [#] Àêòèâàöèÿ: Àâòîìàòè÷åñêîå]])
+	 [?] ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÑ‚ Ñƒ Ð²ÑÐµÑ… Ñ‚ÐµÐºÑÑ‚ Ð½Ð°Ð´ Ð³Ð¾Ð»Ð¾Ð²Ð¾Ð¹ Ñƒ Ð¸Ð³Ñ€Ð¾ÐºÐ°Ð¼Ð¸
+	 [+] Ð¢Ð°ÐºÐ¶Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ CamHack
+	 [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ]])
             if imgui.Checkbox(u8'FarChat', FarChat) then
 				ini.cheat.farchat = FarChat.v
                 inicfg.save(ini, 'adminlite')
@@ -614,10 +614,10 @@ function imgui.OnDrawFrame()
 
 
 			--| Cheat: WallHack|--	
-			ShowHelpMarker([[< ÂàëëÕàê [ÂÕ]
+			ShowHelpMarker([[< Ð’Ð°Ð»Ð»Ð¥Ð°Ðº [Ð’Ð¥]
 
-	 [?] Ïîêàçûâàåò ó âñåõ íèêíåéìû òîëüêî íà ñòðèìå
-	 [#] Àêòèâàöèÿ: Àâòîìàòè÷åñêîå]])
+	 [?] ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÑ‚ Ñƒ Ð²ÑÐµÑ… Ð½Ð¸ÐºÐ½ÐµÐ¹Ð¼Ñ‹ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð° ÑÑ‚Ñ€Ð¸Ð¼Ðµ
+	 [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ]])
 			if imgui.Checkbox(u8'WallHack', WallHack) then
                 ini.cheat.wallhack = WallHack.v
                 inicfg.save(ini, 'adminlite')
@@ -627,11 +627,11 @@ function imgui.OnDrawFrame()
 
 
 			--| Cheat: GodMode |--
-			ShowHelpMarker([[< ÃîäÌîä [ÃÌ]
+			ShowHelpMarker([[< Ð“Ð¾Ð´ÐœÐ¾Ð´ [Ð“Ðœ]
 
-	 [?] Áåññìåðòíûé ïåðñîíàæ
-	 [+] ×èò ðàáîòàåò íà ìàøèíå è íà ïåøêîì
-	 [#] Àêòèâàöèÿ: Insert (Ins)]])
+	 [?] Ð‘ÐµÑÑÐ¼ÐµÑ€Ñ‚Ð½Ñ‹Ð¹ Ð¿ÐµÑ€ÑÐ¾Ð½Ð°Ð¶
+	 [+] Ð§Ð¸Ñ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ðµ Ð¸ Ð½Ð° Ð¿ÐµÑˆÐºÐ¾Ð¼
+	 [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: Insert (Ins)]])
 			if imgui.Checkbox(u8'GodMode', GodMode) then
 				ini.cheat.godmode = GodMode.v
 				inicfg.save(ini, 'adminlite')
@@ -640,12 +640,12 @@ function imgui.OnDrawFrame()
 
 
 			--| Cheat: InfinityGodMode |--
-			ShowHelpMarker([[< Áåñêîí÷íûéÃîäÌîä [ÏÃÌ]
+			ShowHelpMarker([[< Ð‘ÐµÑÐºÐ¾Ð½Ñ‡Ð½Ñ‹Ð¹Ð“Ð¾Ð´ÐœÐ¾Ð´ [ÐŸÐ“Ðœ]
 
-	 [?] Áåññìåðòíûé ïåðñîíàæ áåç àêòèâàöèè
-	 [+] ×èò ðàáîòàåò íà ìàøèíå è íà ïåøêîì, òàêæå ïðè ïðèñîåäèíåíèå íà ñåðâåðå
-	 [#] Àêòèâàöèÿ: Àâòîìàòè÷åñêîå
-	 [!] Âíèìàíèå! Åñëè âû âêëþ÷èòå InfinityGodMode è GodMode - ïîÿâèòñÿ îøèáêè/âûëåòû!]])
+	 [?] Ð‘ÐµÑÑÐ¼ÐµÑ€Ñ‚Ð½Ñ‹Ð¹ Ð¿ÐµÑ€ÑÐ¾Ð½Ð°Ð¶ Ð±ÐµÐ· Ð°ÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ð¸
+	 [+] Ð§Ð¸Ñ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ðµ Ð¸ Ð½Ð° Ð¿ÐµÑˆÐºÐ¾Ð¼, Ñ‚Ð°ÐºÐ¶Ðµ Ð¿Ñ€Ð¸ Ð¿Ñ€Ð¸ÑÐ¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ð½Ð° ÑÐµÑ€Ð²ÐµÑ€Ðµ
+	 [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ
+	 [!] Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ! Ð•ÑÐ»Ð¸ Ð²Ñ‹ Ð²ÐºÐ»ÑŽÑ‡Ð¸Ñ‚Ðµ InfinityGodMode Ð¸ GodMode - Ð¿Ð¾ÑÐ²Ð¸Ñ‚ÑÑ Ð¾ÑˆÐ¸Ð±ÐºÐ¸/Ð²Ñ‹Ð»ÐµÑ‚Ñ‹!]])
 			if imgui.Checkbox(u8'InfinityGodMode', IGodMode) then
 				ini.cheat.igodmode = IGodMode.v
 				inicfg.save(ini, 'adminlite')
@@ -654,14 +654,14 @@ function imgui.OnDrawFrame()
 
 
 	 -- 		--| Cheat: ClickWarp |--
-	 -- 		ShowHelpMarker([[< ÊëèêÂàðï [ÊÂ]
+	 -- 		ShowHelpMarker([[< ÐšÐ»Ð¸ÐºÐ’Ð°Ñ€Ð¿ [ÐšÐ’]
  
-	 --  [?] Òåëåïîðòèðóåò â ëþáîì âèäå
-	 --  [-] ×èò ðàáîòàåò òîëüêî íà ìàøèíå
-	 --  [#] Àêòèâàöèÿ: RButton (êíîïêà êîë¸ñèêà)
-	 --  [#] Óïðàâëåíèå:
-	 --  [#] LShift + -/+ -- Óìåíüøèòü/óâåëè÷èòü 
-	 --  [!] Óïðàâëåíèå ðàáîòàåò òîëüêî íà ìàøèíå]])
+	 --  [?] Ð¢ÐµÐ»ÐµÐ¿Ð¾Ñ€Ñ‚Ð¸Ñ€ÑƒÐµÑ‚ Ð² Ð»ÑŽÐ±Ð¾Ð¼ Ð²Ð¸Ð´Ðµ
+	 --  [-] Ð§Ð¸Ñ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ðµ
+	 --  [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: RButton (ÐºÐ½Ð¾Ð¿ÐºÐ° ÐºÐ¾Ð»Ñ‘ÑÐ¸ÐºÐ°)
+	 --  [#] Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ:
+	 --  [#] LShift + -/+ -- Ð£Ð¼ÐµÐ½ÑŒÑˆÐ¸Ñ‚ÑŒ/ÑƒÐ²ÐµÐ»Ð¸Ñ‡Ð¸Ñ‚ÑŒ 
+	 --  [!] Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ðµ]])
 	 -- 		if imgui.Checkbox(u8'ClickWarp', ClickWarp) then
 	 -- 			ini.cheat.clickwarp = ClickWarp.v
      --             inicfg.save(ini, 'adminlite')
@@ -670,13 +670,13 @@ function imgui.OnDrawFrame()
 
 
 			--| Cheat: SpeedHack |--
-			ShowHelpMarker([[< ÑïèäÕàê [ÑÕ]
+			ShowHelpMarker([[< Ð¡Ð¿Ð¸Ð´Ð¥Ð°Ðº [Ð¡Ð¥]
 
-	 [?] Áûñòðî ïåðåìåùàåò ìàøèíó ñ ïîìîùüþ ñêîðîñòüþ
-	 [-] ×èò è óïðàâëåíèå ðàáîòàåò òîëüêî íà ìàøèíå
-	 [#] Àêòèâàöèÿ: LAlt (ëåâûé Alt)
-	 [#] Óïðàâëåíèå:
-	 [#] LShift + -/+ -- Óìåíüøèòü/óâåëè÷èòü ñêîðîñòü]])
+	 [?] Ð‘Ñ‹ÑÑ‚Ñ€Ð¾ Ð¿ÐµÑ€ÐµÐ¼ÐµÑ‰Ð°ÐµÑ‚ Ð¼Ð°ÑˆÐ¸Ð½Ñƒ Ñ Ð¿Ð¾Ð¼Ð¾Ñ‰ÑŒÑŽ ÑÐºÐ¾Ñ€Ð¾ÑÑ‚ÑŒÑŽ
+	 [-] Ð§Ð¸Ñ‚ Ð¸ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ðµ
+	 [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: LAlt (Ð»ÐµÐ²Ñ‹Ð¹ Alt)
+	 [#] Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ:
+	 [#] LShift + -/+ -- Ð£Ð¼ÐµÐ½ÑŒÑˆÐ¸Ñ‚ÑŒ/ÑƒÐ²ÐµÐ»Ð¸Ñ‡Ð¸Ñ‚ÑŒ ÑÐºÐ¾Ñ€Ð¾ÑÑ‚ÑŒ]])
 			if imgui.Checkbox(u8'SpeedHack', SpeedHack) then
 				ini.cheat.speedhack = SpeedHack.v
                 inicfg.save(ini, 'adminlite')
@@ -685,10 +685,10 @@ function imgui.OnDrawFrame()
 
 
 			--| Cheat: NoFall |--
-			ShowHelpMarker([[< ÀíòèÏàäåíèå [ÀÔ]
+			ShowHelpMarker([[< ÐÐ½Ñ‚Ð¸ÐŸÐ°Ð´ÐµÐ½Ð¸Ðµ [ÐÐ¤]
 
-	 [?] Óáèðàåò àíèìàöèÿ ïðè ïîëó÷åíèå óðîíà îò ïàäåíèè
-	 [#] Àêòèâàöèÿ: Àâòîìàòè÷åñêîå]])
+	 [?] Ð£Ð±Ð¸Ñ€Ð°ÐµÑ‚ Ð°Ð½Ð¸Ð¼Ð°Ñ†Ð¸Ñ Ð¿Ñ€Ð¸ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÑƒÑ€Ð¾Ð½Ð° Ð¾Ñ‚ Ð¿Ð°Ð´ÐµÐ½Ð¸Ð¸
+	 [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ]])
 			if imgui.Checkbox(u8'NoFall', NoFall) then
                 ini.cheat.nofall = NoFall.v
 				inicfg.save(ini, 'adminlite')
@@ -696,10 +696,10 @@ function imgui.OnDrawFrame()
 
 
 			--| Cheat: FishEye |--
-			ShowHelpMarker([[< Ðûáíîé ãëàç [ÐÃ]
+			ShowHelpMarker([[< Ð Ñ‹Ð±Ð½Ð¾Ð¹ Ð³Ð»Ð°Ð· [Ð Ð“]
 
-	 [?] Óâåëè÷èâàåò ãðàäèóñîâ ýêðàíà, êîòîðûå âû ñìîòðèòå
-	 [#] Àêòèâàöèÿ: Àâòîìàòè÷åñêîå]])
+	 [?] Ð£Ð²ÐµÐ»Ð¸Ñ‡Ð¸Ð²Ð°ÐµÑ‚ Ð³Ñ€Ð°Ð´Ð¸ÑƒÑÐ¾Ð² ÑÐºÑ€Ð°Ð½Ð°, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð²Ñ‹ ÑÐ¼Ð¾Ñ‚Ñ€Ð¸Ñ‚Ðµ
+	 [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ]])
 			if imgui.Checkbox(u8'FishEye', FishEye) then
 				ini.cheat.fisheye = FishEye.v
 				inicfg.save(ini, 'adminlite')
@@ -708,13 +708,13 @@ function imgui.OnDrawFrame()
 
 
 			--| Cheat: CamHack |--
-			ShowHelpMarker([[< Ñâîáîäíàÿ êàìåðà [ÊÕ]
+			ShowHelpMarker([[< Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ð°Ñ ÐºÐ°Ð¼ÐµÑ€Ð° [ÐšÐ¥]
 
-	 [?] Âêëþ÷àåò êàìåðà è âèäíî èãðîêàìè òîëüêî íà ñòðèìå
-	 [#] Àêòèâàöèÿ: C + 1 -- ÂÊËÞ×ÈÒÜ | C + 2 -- ÂÛÊËÞ×ÈÒÜ
-	 [#] Óïðàâëåíèå:
-	 [#] WASD -- Äâèæåíèå
-	 [#] -/+ -- Óìåíüøèòü/óâåëè÷èòü ñêîðîñòü]])
+	 [?] Ð’ÐºÐ»ÑŽÑ‡Ð°ÐµÑ‚ ÐºÐ°Ð¼ÐµÑ€Ð° Ð¸ Ð²Ð¸Ð´Ð½Ð¾ Ð¸Ð³Ñ€Ð¾ÐºÐ°Ð¼Ð¸ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð½Ð° ÑÑ‚Ñ€Ð¸Ð¼Ðµ
+	 [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: C + 1 -- Ð’ÐšÐ›Ð®Ð§Ð˜Ð¢Ð¬ | C + 2 -- Ð’Ð«ÐšÐ›Ð®Ð§Ð˜Ð¢Ð¬
+	 [#] Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ:
+	 [#] WASD -- Ð”Ð²Ð¸Ð¶ÐµÐ½Ð¸Ðµ
+	 [#] -/+ -- Ð£Ð¼ÐµÐ½ÑŒÑˆÐ¸Ñ‚ÑŒ/ÑƒÐ²ÐµÐ»Ð¸Ñ‡Ð¸Ñ‚ÑŒ ÑÐºÐ¾Ñ€Ð¾ÑÑ‚ÑŒ]])
             if imgui.Checkbox(u8'CamHack', CamHack) then
                 ini.cheat.camhack = CamHack.v
                 inicfg.save(ini, 'adminlite')
@@ -723,11 +723,11 @@ function imgui.OnDrawFrame()
 
 
 	 --  		--| Cheat: CamHack-Chat |--
-	 -- 		 ShowHelpMarker([[< Ñâîáîäíàÿ êàìåðà ñ ÷àòîì íàä ãîëîâîé [??]
+	 -- 		 ShowHelpMarker([[< Ð¡Ð²Ð¾Ð±Ð¾Ð´Ð½Ð°Ñ ÐºÐ°Ð¼ÐµÑ€Ð° Ñ Ñ‡Ð°Ñ‚Ð¾Ð¼ Ð½Ð°Ð´ Ð³Ð¾Ð»Ð¾Ð²Ð¾Ð¹ [??]
 	 		 
-	 --  [?] Ïîêàçûâàåòñÿ ó âñåõ íàä ãîëîâîé òåêñò, ïðè âêëþ÷åíèå CamHack
-	 --  [#] Àêòèâàöèÿ: Àâòîìàòè÷åñêîå
-	 --  [!] Òðåáîâàíèå: CamHack]])
+	 --  [?] ÐŸÐ¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÑ‚ÑÑ Ñƒ Ð²ÑÐµÑ… Ð½Ð°Ð´ Ð³Ð¾Ð»Ð¾Ð²Ð¾Ð¹ Ñ‚ÐµÐºÑÑ‚, Ð¿Ñ€Ð¸ Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ CamHack
+	 --  [#] ÐÐºÑ‚Ð¸Ð²Ð°Ñ†Ð¸Ñ: ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ
+	 --  [!] Ð¢Ñ€ÐµÐ±Ð¾Ð²Ð°Ð½Ð¸Ðµ: CamHack]])
      --          if imgui.Checkbox(u8'CamHack-Chat', CamHackChat) then
 	 --  			ini.cheat.camhackchat = CamHackChat.v
      --              inicfg.save(ini, 'adminlite')
@@ -739,24 +739,24 @@ function imgui.OnDrawFrame()
 
 
 		-->>| Spoiler: News |<<--
-        if imgui.CollapsingHeader(u8'Íîâîñòè') then
-            if imgui.CollapsingHeader(u8'19.05.2020 | Âåðñèÿ: 1.3 | kyrtion') then
+        if imgui.CollapsingHeader(u8'ÐÐ¾Ð²Ð¾ÑÑ‚Ð¸') then
+            if imgui.CollapsingHeader(u8'19.05.2020 | Ð’ÐµÑ€ÑÐ¸Ñ: 1.3 | kyrtion') then
                 imgui.Text(u8(upd4))
             end 
-            if imgui.CollapsingHeader(u8'16.05.2020 | Âåðñèÿ: 1.2 | kyrtion') then
+            if imgui.CollapsingHeader(u8'16.05.2020 | Ð’ÐµÑ€ÑÐ¸Ñ: 1.2 | kyrtion') then
                 imgui.Text(u8(upd3))
             end 
-            if imgui.CollapsingHeader(u8'15.05.2020 | Âåðñèÿ: 1.1 | kyrtion') then
+            if imgui.CollapsingHeader(u8'15.05.2020 | Ð’ÐµÑ€ÑÐ¸Ñ: 1.1 | kyrtion') then
                 imgui.Text(u8(upd2))
             end 
-            if imgui.CollapsingHeader(u8'11.05.2020 | Âåðñèÿ: 1.0 | kyrtion') then
+            if imgui.CollapsingHeader(u8'11.05.2020 | Ð’ÐµÑ€ÑÐ¸Ñ: 1.0 | kyrtion') then
                 imgui.Text(u8(upd1))
             end 
         end 
         imgui.Separator()
 
 
-        if imgui.Button(u8'Áàã-ðåïîðò è ïðåäëîæåíèå [VK]') then
+        if imgui.Button(u8'Ð‘Ð°Ð³-Ñ€ÐµÐ¿Ð¾Ñ€Ñ‚ Ð¸ Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ [VK]') then
             os.execute('explorer "https://vk.com/kyrtion"')
 		end
 
@@ -1016,13 +1016,13 @@ function fast_funcs_work()
 		-- 				local hoffs = renderGetFontDrawHeight(font)
 		-- 				sy = sy - 2
 		-- 				sx = sx - 2
-		-- 				renderFontDrawText(font, string.format('%0.2fì', dist), sx - (renderGetFontDrawTextLength(font, string.format('%0.2fì', dist)) / 2) + 6, sy - hoffs, 0xFFFFFFFF)
+		-- 				renderFontDrawText(font, string.format('%0.2fÐ¼', dist), sx - (renderGetFontDrawTextLength(font, string.format('%0.2fÐ¼', dist)) / 2) + 6, sy - hoffs, 0xFFFFFFFF)
 		-- 				local tpIntoCar = nil
 		-- 				if colpoint.entityType == 2 then
 		-- 					local car = getVehiclePointerHandle(colpoint.entity)
 		-- 					if doesVehicleExist(car) and (not isCharInAnyCar(playerPed) or storeCarCharIsInNoSave(playerPed) ~= car) then
 		-- 						if isKeyJustPressed(VK_LBUTTON) then tpIntoCar = car end
-		-- 						renderFontDrawText(font, 'Ïîïàñòü íà ìàøèíå', sx - (renderGetFontDrawTextLength(font, 'Warp to car') / 2) + 6, sy - hoffs * 2, -1)
+		-- 						renderFontDrawText(font, 'ÐŸÐ¾Ð¿Ð°ÑÑ‚ÑŒ Ð½Ð° Ð¼Ð°ÑˆÐ¸Ð½Ðµ', sx - (renderGetFontDrawTextLength(font, 'Warp to car') / 2) + 6, sy - hoffs * 2, -1)
 		-- 					end
 		-- 				end
 		-- 				if isKeyJustPressed(VK_LBUTTON) then
@@ -1320,9 +1320,9 @@ function sampev.onShowDialog(id, style, title, button1, button2, text) -- autolo
     --| Auto-Alogin |--
 	-- if ini.account.autoAlogin then
 	-- 	function sampev.onServerMessage(color, text)
-	-- 		if text:find('Äîáðî ïîæàëîâàòü íà ') then
+	-- 		if text:find('Ð”Ð¾Ð±Ñ€Ð¾ Ð¿Ð¾Ð¶Ð°Ð»Ð¾Ð²Ð°Ñ‚ÑŒ Ð½Ð° ') then
 	-- 			sampSendChat('/alogin')
-	-- 			sampAddChatMessage('Äîáðî ïîæàëîâàòü íà {ff4545}Radix Role Play', -1)
+	-- 			sampAddChatMessage('Ð”Ð¾Ð±Ñ€Ð¾ Ð¿Ð¾Ð¶Ð°Ð»Ð¾Ð²Ð°Ñ‚ÑŒ Ð½Ð° {ff4545}Radix Role Play', -1)
 	-- 		end
 	-- 	end
 	-- 	if id == 87 then
