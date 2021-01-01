@@ -3,8 +3,8 @@ script_author('kyrtion')
 script_version('1.5')
 script_version_number(6)
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-require 					'lib.moonloader'
-require 					'lib.sampfuncs'
+require 				'lib.moonloader'
+require 				'lib.sampfuncs'
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 local memory        			= require 'memory'
 local sampev        			= require 'lib.samp.events'
