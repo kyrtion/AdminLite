@@ -1,92 +1,88 @@
 script_name('AdminLite')
 script_author('kyrtion')
-script_version('1.4')
-script_version_number(5)
+script_version('1.5')
+script_version_number(6)
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 require 					'lib.moonloader'
 require 					'lib.sampfuncs'
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-local memory        		= require 'memory'
-local sampev        		= require 'lib.samp.events'
-local imgui         		= require 'imgui'
-local encoding      		= require 'encoding'
-local inicfg        		= require 'inicfg'
+local memory        			= require 'memory'
+local sampev        			= require 'lib.samp.events'
+local imgui         			= require 'imgui'
+local encoding      			= require 'encoding'
+local inicfg        			= require 'inicfg'
 local Matrix3X3 			= require 'matrix3x3'
 local Vector3D 				= require 'vector3d'
-encoding.default    		= 'cp1251'
-u8                  		= encoding.UTF8
+encoding.default    			= 'cp1251'
+u8                  			= encoding.UTF8
 --.--.--.--.--.--.--.--.--.--.--.--.--.--.--
-local mx, my        		= getScreenResolution()
+local mx, my        			= getScreenResolution()
 local result 				= ''
 local fe_locked 			= false
 
 -->>| Сategories: Ini and Config |<<-- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG -- INI CONFIG 
 local ini = inicfg.load({
     --| Personal Info |--
-    account = {
-        password     		= '',
-        autoPass     		= false,
-        alogin       		= '',
-        autoAlogin   		= false,
-        -- pin       		   = '',
-        startmsg     		= true
-    },
+	account = {
+		password     		= '',
+		autoPass     		= false,
+		alogin       		= '',
+		autoAlogin   		= false,
+		startmsg     		= true},
     --| Cheats |--
-    cheat = {
-        wallhack     		= false,
-        camhack      		= false,
+	cheat = {
+		wallhack     		= false,
+		camhack      		= false,
 		camhackchat  		= false,
-		nofall 	 	 		= false,
-		--
-		godmode 	 		= false,
-		igodmode 	 		= false,
-		--		
-		airbreak 	 		= false,
-		s_airbreak	 		= 1,
-		--		
-		speedhack 	 		= false,
-		s_speedhack  		= 150.0
-	},
+		nofall 	 	 	= false,
+		godmode 	 	= false,
+		igodmode 	 	= false,
+		airbreak 	 	= false,
+		s_airbreak	 	= 1,	
+		speedhack 	 	= false,
+		s_speedhack  		= 150.0},
+    --| Остальные |--
 	other = {
-		color_main ='40E0D0'
-	}
- }, 'adminlite')
+		color_main ='40E0D0'}
+	},'adminlite')
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 -->>| Сategories: Local |<<--
  --| Personal Information |--
-  local nick              	= imgui.ImBuffer(tostring(ini.account.nick), 256)
-  local password          	= imgui.ImBuffer(tostring(ini.account.password), 256)
-  local alogin            	= imgui.ImBuffer(tostring(ini.account.alogin), 256)
-  local inputBufferText 	= imgui.ImBuffer(256)
-  -- local pin               	= imgui.ImBuffer(tostring(ini.account.pin), 256)
+  local nick              		= imgui.ImBuffer(tostring(ini.account.nick), 256)
+  local password          		= imgui.ImBuffer(tostring(ini.account.password), 256)
+  local alogin            		= imgui.ImBuffer(tostring(ini.account.alogin), 256)
+  local inputBufferText 		= imgui.ImBuffer(256)
  --| CheckBox |--
-  local startmsg          	= imgui.ImBool(ini.account.startmsg)
-  local autoAlogin        	= imgui.ImBool(ini.account.autoAlogin)
-  local autoPass          	= imgui.ImBool(ini.account.autoPass)
+  local startmsg          		= imgui.ImBool(ini.account.startmsg)
+  local autoAlogin        		= imgui.ImBool(ini.account.autoAlogin)
+  local autoPass          		= imgui.ImBool(ini.account.autoPass)
  --| Cheats |--
-  local AirBreak          	= imgui.ImBool(ini.cheat.airbreak)
-  local WallHack          	= imgui.ImBool(ini.cheat.wallhack)
-  local CamHack           	= imgui.ImBool(ini.cheat.camhack)
-  local NoFall			 	= imgui.ImBool(ini.cheat.nofall)
+  local AirBreak          		= imgui.ImBool(ini.cheat.airbreak)
+  local WallHack          		= imgui.ImBool(ini.cheat.wallhack)
+  local CamHack           		= imgui.ImBool(ini.cheat.camhack)
+  local NoFall				= imgui.ImBool(ini.cheat.nofall)
   local GodMode 			= imgui.ImBool(ini.cheat.godmode)
   local IGodMode			= imgui.ImBool(ini.cheat.igodmode)
-  local SpeedHack		 	= imgui.ImBool(ini.cheat.speedhack)
-  -- local FishEye				= imgui.ImBool(ini.cheat.fisheye)
-  -- local ClickWarp		 	= imgui.ImBool(ini.cheat.clickwarp)
-  -- local FarChat 			= imgui.ImBool(ini.cheat.farchat)
+  local SpeedHack			= imgui.ImBool(ini.cheat.speedhack)
  --| Windows |--
-  local own           		= imgui.ImBool(false)
-  local two           		= imgui.ImBool(false)
-  -- local test 				= imgui.ImBool(false)
---  local result, id = sampGetPlayerIdByCharHandle(playerPed) local nick = sampGetPlayerNickname(id)
+  local own           			= imgui.ImBool(false)
+  local two           			= imgui.ImBool(false)
 tick = {Keys = {Up = 0, Down = 0, Plus = 0, Minus = 0, Num = {Plus = 0, Minus = 0}}, Fps = 0, Notification = 0, CoordsMaster = 0, ClickWarp = 0, Time = {Up = 165, Down = 165, PlusMinus = 150, NumPlusMinus = 150}}
 arrows = {0, 1, 2, 3, 4}
 cheat = {}
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 
 -->>| Сategories: News |<<--      SHABLON: --| Version: *.* |--
+
+ --| Version: 1.5 |--
+  local upd6 = [[
+  - Убрано калькулятор.
+  - Исправлены критичные ошибки.
+  - Исправлен мигающий курсор(не подтверждено).
+  - Исправлены мелочные баги.]]
+
  --| Version: 1.4 |--
   local upd5 = [[
   - Добавлен калькулятор, команда /calc.]]
@@ -101,7 +97,7 @@ cheat = {}
  	• InfinityGodMode,
  	• SpeedHack,
  	• NoFall,
-    • CamHack.
+    	• CamHack.
   - Все тексты превратили в спойлер на категории [Новости].
   - Изменены направление и название, а также описание.
   - Исправление багов (Auto-пароль, Auto-alogin).
@@ -110,19 +106,19 @@ cheat = {}
  --| Version: 1.2 |--
   local upd3 = [[
   - Добавлен чит в категории [Читы]:
-    • WallHack.
+	• WallHack.
   - Добавлен кнопка 'Баг-репорт и предложение [VK]']]
 
  --| Version: 1.1 |--
   local upd2 = [[
   - Добавлены кнопки в категории [Авторизация]:
-    • Авто-ввод пароля,
-    • Авто заход в админку,
-    • Стартовое сообщение.
+	• Авто-ввод пароля,
+	• Авто заход в админку,
+	• Стартовое сообщение.
   - Исправление багов
   ! Скоро будут добавлены 'Читы'
-    / WallHack,
-    / AirBreak.]]
+	/ WallHack,
+	/ AirBreak.]]
  
  --| Version: 1.0 |--
   local upd1 = [[
@@ -157,7 +153,6 @@ function main()
 	if ini.account.startmsg then
         sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Скрипт успешно загружен. Версия: {fcfa1a}'..thisScript().version..'{FFFFFF}.', -1)
         sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Автор - {fcfa1a}kyrtion{FFFFFF}. Выключить данное сообщение можно в {fcfa1a}/alite{FFFFFF}.', -1)
-        --sampAddChatMessage('{fcfa1a}[AdminLite]{ffffff}: Скрипты успешны загружены! Автор: kyrtion. Версия: 1', -1)
     end
     -- apply_custom_style() -- Change color and thems
 
@@ -170,42 +165,27 @@ function main()
 	chRadarHud = 0
 	chTime = 0
 	chKeyPressed = 0
-
 	imgui.Process = false
-
 	while true do
 	--| while true do |--
     --| Wait(0) |--
 		wait(0)
-
-
+		
 		if own.v then -- test.v
 			imgui.Process = true
 			imgui.LockPlayer = true
 			imgui.ShowCursor = true
-		-- elseif stats.v then
-		-- 	imgui.ShowCursor = false
-		-- 	imgui.Process = true
 		else
 			imgui.Process = false
 			imgui.LockPlayer = false
 			imgui.ShowCursor = false
 		end
 		
-
-
-
 		check_keystrokes()
 		fast_funcs_work()
 		main_funcs()
 		secondary_funcs()
 		fps_correction()
-
-
-
-
-
-
 		
         --| Cheat: CamHack |-- < Author: sanek a.k.a Maks_Fender, edited by ANIKI >
         if ini.cheat.camhack then
@@ -480,8 +460,8 @@ function main()
 				    if chRadarHud == 0 then
 					    displayRadar(true)
 					    displayHud(true)
-                        chRadarHud = 1
-                    else
+					    chRadarHud = 1
+                                    else
 					    displayRadar(false)
 					    displayHud(false)
 					    chRadarHud = 0
@@ -495,8 +475,8 @@ function main()
 			    if isKeyDown(189) then 
 				    chSpeed = chSpeed - 0.01 
 				    if chSpeed < 0.01 then chSpeed = 0.01 end
-                    printStringNow(chSpeed, 1000)
-                end 
+                    		    printStringNow(chSpeed, 1000)
+                            end 
 			    if isKeyDown(VK_C) and isKeyDown(VK_2) then
 				    --setPlayerControl(playerchar, true)
 				    displayRadar(true)
@@ -511,9 +491,9 @@ function main()
 			        restoreCameraJumpcut()
 			        setCameraBehindPlayer()
 			        chFlymode = 0     
-		        end
+		             end
          -- Cheat: CamHack <End> --
-            end
+			end
 		end
 	end
 end
@@ -629,25 +609,7 @@ function imgui.OnDrawFrame()
 			if imgui.Checkbox(u8'InfinityGodMode', IGodMode) then
 				ini.cheat.igodmode = IGodMode.v
 				inicfg.save(ini, 'adminlite')
-			end
-			
-
-
-	 -- 		--| Cheat: ClickWarp |--
-	 -- 		ShowHelpMarker([[< КликВарп [КВ]
- 
-	 --  [?] Телепортирует в любом виде
-	 --  [-] Чит работает только на машине
-	 --  [#] Активация: RButton (кнопка колёсика)
-	 --  [#] Управление:
-	 --  [#] LShift + -/+ -- Уменьшить/увеличить 
-	 --  [!] Управление работает только на машине]])
-	 -- 		if imgui.Checkbox(u8'ClickWarp', ClickWarp) then
-	 -- 			ini.cheat.clickwarp = ClickWarp.v
-     --             inicfg.save(ini, 'adminlite')
-	 -- 		end
-			
-
+			end	
 
 			--| Cheat: SpeedHack |--
 			ShowHelpMarker([[< СпидХак [СХ]
@@ -662,8 +624,6 @@ function imgui.OnDrawFrame()
                 inicfg.save(ini, 'adminlite')
 			end
 			
-
-
 			--| Cheat: NoFall |--
 			ShowHelpMarker([[< АнтиПадение [АФ]
 
@@ -673,22 +633,6 @@ function imgui.OnDrawFrame()
                 ini.cheat.nofall = NoFall.v
 				inicfg.save(ini, 'adminlite')
 			end
-
-
-	 -- 		--| Cheat: FishEye |--
-	 -- 		ShowHelpMarker([[< Рыбной глаз [РГ]
-
-	 --  [?] Увеличивает градиусов экрана, которые вы смотрите
-	 --  [#] Активация: Автоматическое]])
-	 -- 		if imgui.Checkbox(u8'FishEye', FishEye) then
-	 -- 			ini.cheat.fisheye = FishEye.v
-	 -- 			if FishEye.v == true then
-	 -- 				fisheye()
-	 -- 			end
-	 -- 			inicfg.save(ini, 'adminlite')
-	 -- 		end
-			
-
 
 			--| Cheat: CamHack |--
 			ShowHelpMarker([[< Свободная камера [КХ]
@@ -709,16 +653,22 @@ function imgui.OnDrawFrame()
 
 		-->>| Spoiler: News |<<--
         if imgui.CollapsingHeader(u8'Новости') then
-            if imgui.CollapsingHeader(u8'19.05.2020 | Версия: 1.3 | kyrtion') then
+	    if imgui.CollapsingHeader(u8'01.01.2020 | Версия: 1.5') then
+                imgui.Text(u8(upd6))
+            end
+	    if imgui.CollapsingHeader(u8'11.11.2020 | Версия: 1.4') then
+                imgui.Text(u8(upd5))
+            end
+            if imgui.CollapsingHeader(u8'19.05.2020 | Версия: 1.3') then
                 imgui.Text(u8(upd4))
             end 
-            if imgui.CollapsingHeader(u8'16.05.2020 | Версия: 1.2 | kyrtion') then
+            if imgui.CollapsingHeader(u8'16.05.2020 | Версия: 1.2') then
                 imgui.Text(u8(upd3))
             end 
-            if imgui.CollapsingHeader(u8'15.05.2020 | Версия: 1.1 | kyrtion') then
+            if imgui.CollapsingHeader(u8'15.05.2020 | Версия: 1.1') then
                 imgui.Text(u8(upd2))
             end 
-            if imgui.CollapsingHeader(u8'11.05.2020 | Версия: 1.0 | kyrtion') then
+            if imgui.CollapsingHeader(u8'11.05.2020 | Версия: 1.0') then
                 imgui.Text(u8(upd1))
             end 
         end 
@@ -775,17 +725,6 @@ function fast_funcs_work()
 	if not isSampfuncsConsoleActive() and not sampIsChatInputActive() and not sampIsDialogActive() and not isPauseMenuActive() then
 		local time = os.clock() * 1000
 
-		-- if isKeyJustPressed(VK_OEM_5) then -- unfreeze
-		-- 	if isCharInAnyCar(playerPed) then
-		-- 		freezeCarPosition(storeCarCharIsInNoSave(playerPed), false)
-		-- 	else
-		-- 		setPlayerControl(playerHandle, true)
-		-- 		freezeCharPosition(playerPed, false)
-		-- 		clearCharTasksImmediately(playerPed)
-		-- 	end
-		-- 	restoreCameraJumpcut()
-		-- end
-
 		--| Cheat: SpeedHack-Press|--
 		if ini.cheat.speedhack and (isKeyDown(VK_LMENU) and isCharInAnyCar(playerPed)) then -- speedhack
 			printStringNow('SpeedHack: ~g~Pressed', 500)
@@ -822,8 +761,6 @@ end
 
 function main_funcs()
 
-	
-
 	local WallHack = sampGetServerSettingsPtr()
 	if ini.cheat.wallhack then
 		cheat.WallHack = true
@@ -853,7 +790,6 @@ function main_funcs()
 		setCharProofs(playerPed, false, false, false, false, false)
 	end	
 	
-
 	local time = os.clock() * 1000
 	if cheat.AirBreak then -- airbreak
 		if isCharInAnyCar(playerPed) then heading = getCarHeading(storeCarCharIsInNoSave(playerPed))
@@ -918,9 +854,7 @@ function secondary_funcs()
 	end
 end
 
-function fps_correction()
-	return representIntAsFloat(readMemory(0xB7CB5C, 4, false))
-end
+function fps_correction() return representIntAsFloat(readMemory(0xB7CB5C, 4, false)) end
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 -->>| Local AutoLogin |<<--
 function sampev.onShowDialog(id, style, title, button1, button2, text) -- autologin
@@ -960,4 +894,4 @@ function ShowHelpMarker(text)
 	imgui.SameLine()
 end
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
---<<== Game Find: String codes (610)
+--<<== Game Find: String codes (897 - 01/01/2021)
