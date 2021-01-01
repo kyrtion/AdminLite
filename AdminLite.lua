@@ -37,9 +37,6 @@ local ini = inicfg.load({
         camhack      		= false,
 		camhackchat  		= false,
 		nofall 	 	 		= false,
-		-- clickwarp			 = false,
-		farchat 	 		= false,
-		fisheye 	 		= false,
 		--
 		godmode 	 		= false,
 		igodmode 	 		= false,
@@ -76,13 +73,12 @@ local ini = inicfg.load({
   local GodMode 			= imgui.ImBool(ini.cheat.godmode)
   local IGodMode			= imgui.ImBool(ini.cheat.igodmode)
   local SpeedHack		 	= imgui.ImBool(ini.cheat.speedhack)
-  local FishEye				= imgui.ImBool(ini.cheat.fisheye)
---   local ClickWarp		 	= imgui.ImBool(ini.cheat.clickwarp)
-  local FarChat 			= imgui.ImBool(ini.cheat.farchat)
+  -- local FishEye				= imgui.ImBool(ini.cheat.fisheye)
+  -- local ClickWarp		 	= imgui.ImBool(ini.cheat.clickwarp)
+  -- local FarChat 			= imgui.ImBool(ini.cheat.farchat)
  --| Windows |--
   local own           		= imgui.ImBool(false)
   local two           		= imgui.ImBool(false)
-  local calc 		 		= imgui.ImBool(false)
   -- local test 				= imgui.ImBool(false)
 --  local result, id = sampGetPlayerIdByCharHandle(playerPed) local nick = sampGetPlayerNickname(id)
 tick = {Keys = {Up = 0, Down = 0, Plus = 0, Minus = 0, Num = {Plus = 0, Minus = 0}}, Fps = 0, Notification = 0, CoordsMaster = 0, ClickWarp = 0, Time = {Up = 165, Down = 165, PlusMinus = 150, NumPlusMinus = 150}}
@@ -153,8 +149,6 @@ function main()
 	font22 = renderCreateFont('Verdana', 10, 9)
 	font11 = renderCreateFont('Verdana', 6, 4)
 
-
-	initializeRender()
 	while not isSampAvailable() do
 		wait(1000)
 	end
@@ -169,7 +163,6 @@ function main()
 
     -->>| Categories: Register Chat Command |<<--
 	sampRegisterChatCommand('alite', cmd_alite)
-	sampRegisterChatCommand('calc', cmd_calc)
 	-- sampRegisterChatCommand('test', cmd_test)
     --| Cheat: Info For CamHack |--
     chFlymode = 0  
@@ -184,11 +177,12 @@ function main()
 	--| while true do |--
     --| Wait(0) |--
 		wait(0)
-		if own.v or calc.v then -- test.v
+
+
+		if own.v then -- test.v
 			imgui.Process = true
 			imgui.LockPlayer = true
 			imgui.ShowCursor = true
-			showCursor(true)
 		-- elseif stats.v then
 		-- 	imgui.ShowCursor = false
 		-- 	imgui.Process = true
@@ -196,8 +190,8 @@ function main()
 			imgui.Process = false
 			imgui.LockPlayer = false
 			imgui.ShowCursor = false
-			showCursor(false)
 		end
+		
 
 
 
@@ -596,20 +590,6 @@ function imgui.OnDrawFrame()
 				ini.cheat.airbreak = AirBreak.v
                 inicfg.save(ini, 'adminlite')
 			end
-			
-
-
-			--| Cheat: FarChat |--
-			ShowHelpMarker([[< ДальнийЧат [ДЧ]
-
-	 [?] Показывает у всех текст над головой у игроками
-	 [+] Также работает CamHack
-	 [#] Активация: Автоматическое]])
-            if imgui.Checkbox(u8'FarChat', FarChat) then
-				ini.cheat.farchat = FarChat.v
-                inicfg.save(ini, 'adminlite')
-			end
-			
 
 
 
@@ -695,15 +675,18 @@ function imgui.OnDrawFrame()
 			end
 
 
-			--| Cheat: FishEye |--
-			ShowHelpMarker([[< Рыбной глаз [РГ]
+	 -- 		--| Cheat: FishEye |--
+	 -- 		ShowHelpMarker([[< Рыбной глаз [РГ]
 
-	 [?] Увеличивает градиусов экрана, которые вы смотрите
-	 [#] Активация: Автоматическое]])
-			if imgui.Checkbox(u8'FishEye', FishEye) then
-				ini.cheat.fisheye = FishEye.v
-				inicfg.save(ini, 'adminlite')
-			end
+	 --  [?] Увеличивает градиусов экрана, которые вы смотрите
+	 --  [#] Активация: Автоматическое]])
+	 -- 		if imgui.Checkbox(u8'FishEye', FishEye) then
+	 -- 			ini.cheat.fisheye = FishEye.v
+	 -- 			if FishEye.v == true then
+	 -- 				fisheye()
+	 -- 			end
+	 -- 			inicfg.save(ini, 'adminlite')
+	 -- 		end
 			
 
 
@@ -719,20 +702,6 @@ function imgui.OnDrawFrame()
                 ini.cheat.camhack = CamHack.v
                 inicfg.save(ini, 'adminlite')
 			end
-			
-
-
-	 --  		--| Cheat: CamHack-Chat |--
-	 -- 		 ShowHelpMarker([[< Свободная камера с чатом над головой [??]
-	 		 
-	 --  [?] Показывается у всех над головой текст, при включение CamHack
-	 --  [#] Активация: Автоматическое
-	 --  [!] Требование: CamHack]])
-     --          if imgui.Checkbox(u8'CamHack-Chat', CamHackChat) then
-	 --  			ini.cheat.camhackchat = CamHackChat.v
-     --              inicfg.save(ini, 'adminlite')
-	 --  		end
-	 		
 		end
 		imgui.Separator()
 
@@ -759,155 +728,15 @@ function imgui.OnDrawFrame()
         if imgui.Button(u8'Баг-репорт и предложение [VK]') then
             os.execute('explorer "https://vk.com/kyrtion"')
 		end
-
+		-- imgui.ShowCursor = false
+		-- showCursor(false)
 		imgui.End()
 	end
-
-	--| Window: calc |--
-	if calc.v then
-        imgui.SetNextWindowSize(imgui.ImVec2(250, 250), imgui.Cond.FirstUseEver)
-        imgui.SetNextWindowPos(imgui.ImVec2(mx/2, my/2), imgui.Cond.FirstUseEver)
-        imgui.Begin(u8'Special for AdminLite '..thisScript().version, calc, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse + imgui.WindowFlags.NoScrollbar)
-		-- imgui.BeginChild('##calc2', imgui.ImVec2(mx/5.6, my/3.4), true)
-        imgui.Text(result)
-        imgui.InputText('##calc3', inputBufferText)
-        if imgui.Button('9', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = string.format('%s9', inputBufferText.v)
-        end
-        imgui.SameLine()
-        if imgui.Button('8', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = string.format('%s8', inputBufferText.v)
-        end
-        imgui.SameLine()
-        if imgui.Button('7', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = string.format('%s7', inputBufferText.v)
-        end
-		imgui.SameLine()
-		if imgui.Button('/', imgui.ImVec2(40, 40)) then
-			local bufferFirstNum, bufferAct = result:match('(%d+)(.+)')
-			if tonumber(bufferFirstNum) then
-				local numResult = tonumber(bufferFirstNum) / tonumber(inputBufferText.v)
-				result = string.format('%s/', tostring(numResult))
-				inputBufferText.v = ''
-			else
-				result = string.format('%s/', inputBufferText.v)
-				inputBufferText.v = ''
-			end
-		end
-		imgui.SameLine()
-		if imgui.Button('CLR', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = ''
-			result = ''
-        end
-		--imgui.SameLine()
-        if imgui.Button('6', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = string.format('%s6', inputBufferText.v)
-        end
-        imgui.SameLine()
-        if imgui.Button('5', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = string.format('%s5', inputBufferText.v)
-        end
-        imgui.SameLine()
-        if imgui.Button('4', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = string.format('%s4', inputBufferText.v)
-        end
-		imgui.SameLine()
-		if imgui.Button('*', imgui.ImVec2(40, 40)) then
-			local bufferFirstNum, bufferAct = result:match('(%d+)(.+)')
-			if tonumber(bufferFirstNum) then
-				local numResult = tonumber(bufferFirstNum) * tonumber(inputBufferText.v)
-				result = string.format('%s*', tostring(numResult))
-				inputBufferText.v = ''
-			else
-				result = string.format('%s*', inputBufferText.v)
-				inputBufferText.v = ''
-			end
-        end
-		imgui.SameLine()
-		if imgui.Button('SQRT', imgui.ImVec2(40, 40)) then
-			if tonumber(inputBufferText.v) then
-				local bufferResult = math.sqrt(tonumber(inputBufferText.v))
-				result = tostring(bufferResult)
-			end
-		end
-        if imgui.Button('3', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = string.format('%s3', inputBufferText.v)
-        end
-        imgui.SameLine()
-        if imgui.Button('2', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = string.format('%s2', inputBufferText.v)
-        end
-        imgui.SameLine()
-        if imgui.Button('1', imgui.ImVec2(40, 40)) then
-            inputBufferText.v = string.format('%s1', inputBufferText.v)
-        end
-		imgui.SameLine()
-		if imgui.Button('-', imgui.ImVec2(40, 40)) then
-            local bufferFirstNum, bufferAct = result:match('(%d+)(.+)')
-			if tonumber(bufferFirstNum) then
-				local numResult = tonumber(bufferFirstNum) - tonumber(inputBufferText.v)
-				result = string.format('%s-', tostring(numResult))
-				inputBufferText.v = ''
-			else
-				result = string.format('%s-', inputBufferText.v)
-				inputBufferText.v = ''
-			end
-        end
-		imgui.SameLine()
-		if imgui.Button('^', imgui.ImVec2(40, 40)) then
-			result = string.format('%s^', inputBufferText.v)
-			inputBufferText.v = ''
-		end
-		if imgui.Button('0', imgui.ImVec2(88, 40)) then
-            inputBufferText.v = string.format('%s0', inputBufferText.v)
-        end
-		imgui.SameLine()
-		if imgui.Button('+', imgui.ImVec2(40, 40)) then
-			local bufferFirstNum, bufferAct = result:match('(%d+)(.+)')
-			if tonumber(bufferFirstNum) then
-				local numResult = tonumber(bufferFirstNum) + tonumber(inputBufferText.v)
-				result = string.format('%s+', tostring(numResult))
-				inputBufferText.v = ''
-			else
-				result = string.format('%s+', inputBufferText.v)
-				inputBufferText.v = ''
-			end
-        end
-		imgui.SameLine()
-		if imgui.Button('=', imgui.ImVec2(88, 40)) then
-			local bufferFirstNum, bufferAct = result:match('(%d+)(.+)')
-			if bufferAct == '+' then
-				local numResult = tonumber(bufferFirstNum) + tonumber(inputBufferText.v)
-				result = tostring(numResult)
-			elseif bufferAct == '-' then
-				local numResult = tonumber(bufferFirstNum) - tonumber(inputBufferText.v)
-				result = tostring(numResult)
-			elseif bufferAct == '/' then
-				local numResult = tonumber(bufferFirstNum) / tonumber(inputBufferText.v)
-				result = tostring(numResult)
-			elseif bufferAct == '*' then
-				local numResult = tonumber(bufferFirstNum) * tonumber(inputBufferText.v)
-				result = tostring(numResult)
-			elseif bufferAct == '^' then
-				local numResult = tonumber(bufferFirstNum) ^ tonumber(inputBufferText.v)
-				result = tostring(numResult)
-			end
-			inputBufferText.v = ''
-		end
-		-- imgui.EndChild()
-		imgui.End()
-	end
-
 end
 -- Command's for get set windows at ImGui
 function cmd_alite()
 	own.v = not own.v
 	imgui.Process = own.v
-end
-
-function cmd_calc()
-	calc.v = not calc.v
-	imgui.Process = calc.v
 end
 
 
@@ -939,12 +768,6 @@ function check_keystrokes()
 				printStringNow("~r~AirBreak", 1500)
 			end
 		end
-
-
-		-- if ini.cheat.clickwarp and isKeyJustPressed(VK_MBUTTON) then
-		-- 	cheat.ClickWarp = not cheat.ClickWarp
-		-- 	if cheat.ClickWarp then sampSetCursorMode(2) else sampSetCursorMode(0) end
-		-- end
 	end
 end
 
@@ -993,59 +816,6 @@ function fast_funcs_work()
 			printStringNow('SpeedHack: '..ini.cheat.s_speedhack, 500)
 			tick.Keys.Minus = os.clock() * 1000
 		end
-
-	   -- if ini.cheat.clickwarp and cheat.ClickWarp then
-		-- 	if sampGetCursorMode() == 0 then sampSetCursorMode(2) end
-		-- 	local sx, sy = getCursorPos()
-		-- 	local sw, sh = getScreenResolution()
-		-- 	if sx >= 0 and sy >= 0 and sx < sw and sy < sh then
-		-- 		local posX, posY, posZ = convertScreenCoordsToWorld3D(sx, sy, 700.0)
-		-- 		local camX, camY, camZ = getActiveCameraCoordinates()
-		-- 		local result, colpoint = processLineOfSight(camX, camY, camZ, posX, posY, posZ, true, true, false, true, false, false, false)
-		-- 		if result and colpoint.entity ~= 0 then
-		-- 			local normal = colpoint.normal
-		-- 			local pos = Vector3D(colpoint.pos[1], colpoint.pos[2], colpoint.pos[3]) - (Vector3D(normal[1], normal[2], normal[3]) * 0.1)
-		-- 			local zOffset = 300
-		-- 			if normal[3] >= 0.5 then zOffset = 1 end
-		-- 			local result, colpoint2 = processLineOfSight(pos.x, pos.y, pos.z + zOffset, pos.x, pos.y, pos.z - 0.3,
-		-- 				true, true, false, true, false, false, false)
-		-- 			if result then
-		-- 				pos = Vector3D(colpoint2.pos[1], colpoint2.pos[2], colpoint2.pos[3] + 1)
-		-- 				local curX, curY, curZ = getCharCoordinates(playerPed)
-		-- 				local dist = getDistanceBetweenCoords3d(curX, curY, curZ, pos.x, pos.y, pos.z)
-		-- 				local hoffs = renderGetFontDrawHeight(font)
-		-- 				sy = sy - 2
-		-- 				sx = sx - 2
-		-- 				renderFontDrawText(font, string.format('%0.2fм', dist), sx - (renderGetFontDrawTextLength(font, string.format('%0.2fм', dist)) / 2) + 6, sy - hoffs, 0xFFFFFFFF)
-		-- 				local tpIntoCar = nil
-		-- 				if colpoint.entityType == 2 then
-		-- 					local car = getVehiclePointerHandle(colpoint.entity)
-		-- 					if doesVehicleExist(car) and (not isCharInAnyCar(playerPed) or storeCarCharIsInNoSave(playerPed) ~= car) then
-		-- 						if isKeyJustPressed(VK_LBUTTON) then tpIntoCar = car end
-		-- 						renderFontDrawText(font, 'Попасть на машине', sx - (renderGetFontDrawTextLength(font, 'Warp to car') / 2) + 6, sy - hoffs * 2, -1)
-		-- 					end
-		-- 				end
-		-- 				if isKeyJustPressed(VK_LBUTTON) then
-		-- 					if tpIntoCar then
-		-- 						if not jumpIntoCar(tpIntoCar) then teleportPlayer(pos.x, pos.y, pos.z) end
-		-- 					else
-		-- 						if isCharInAnyCar(playerPed) then
-		-- 							local norm = Vector3D(colpoint.normal[1], colpoint.normal[2], 0)
-		-- 							local norm2 = Vector3D(colpoint2.normal[1], colpoint2.normal[2], colpoint2.normal[3])
-		-- 							rotateCarAroundUpAxis(storeCarCharIsInNoSave(playerPed), norm2)
-		-- 							pos = pos - norm * 1.8
-		-- 							pos.z = pos.z - 1.1
-		-- 						end
-		-- 						teleportPlayer(pos.x, pos.y, pos.z)
-		-- 						tick.ClickWarp = os.clock() * 1000
-		-- 					end
-		-- 					sampSetCursorMode(0)
-		-- 					cheat.ClickWarp = false
-		-- 				end
-		-- 			end
-		-- 		end
-		-- 	end
-		-- end
 	end
 end
 
@@ -1093,48 +863,50 @@ function main_funcs()
 		local angle = getHeadingFromVector2d(targetCamX - camCoordX, targetCamY - camCoordY)
 		if isCharInAnyCar(playerPed) then difference = 0.79 else difference = 1.0 end
 		setCharCoordinates(playerPed, airBrkCoords[1], airBrkCoords[2], airBrkCoords[3] - difference)
-		if isKeyDown(VK_W) then
-			airBrkCoords[1] = airBrkCoords[1] + ini.cheat.s_airbreak * math.sin(-math.rad(angle))
-			airBrkCoords[2] = airBrkCoords[2] + ini.cheat.s_airbreak * math.cos(-math.rad(angle))
-			if not isCharInAnyCar(playerPed) then setCharHeading(playerPed, angle)
-			else setCarHeading(storeCarCharIsInNoSave(playerPed), angle)
-			end
-		elseif isKeyDown(VK_S) then
-			airBrkCoords[1] = airBrkCoords[1] - ini.cheat.s_airbreak * math.sin(-math.rad(heading))
-			airBrkCoords[2] = airBrkCoords[2] - ini.cheat.s_airbreak * math.cos(-math.rad(heading))
-			if not isCharInAnyCar(playerPed) then setCharHeading(playerPed, angle)
-			else setCarHeading(storeCarCharIsInNoSave(playerPed), angle)
-			end
-		end
-		if isKeyDown(VK_A) then
-			airBrkCoords[1] = airBrkCoords[1] - ini.cheat.s_airbreak * math.sin(-math.rad(heading - 90))
-			airBrkCoords[2] = airBrkCoords[2] - ini.cheat.s_airbreak * math.cos(-math.rad(heading - 90))
-			if not isCharInAnyCar(playerPed) then setCharHeading(playerPed, angle)
-			else setCarHeading(storeCarCharIsInNoSave(playerPed), angle)
-			end
-		elseif isKeyDown(VK_D) then
-			airBrkCoords[1] = airBrkCoords[1] - ini.cheat.s_airbreak * math.sin(-math.rad(heading + 90))
-			airBrkCoords[2] = airBrkCoords[2] - ini.cheat.s_airbreak * math.cos(-math.rad(heading + 90))
-			if not isCharInAnyCar(playerPed) then setCharHeading(playerPed, angle)
-			else setCarHeading(storeCarCharIsInNoSave(playerPed), angle)
-			end
-		end
-		if isKeyDown(VK_UP) then airBrkCoords[3] = airBrkCoords[3] + ini.cheat.s_airbreak / 2.0 end
-		if isKeyDown(VK_DOWN) and airBrkCoords[3] > -95.0 then airBrkCoords[3] = airBrkCoords[3] - ini.cheat.s_airbreak / 2.0 end
 		if not isSampfuncsConsoleActive() and not sampIsChatInputActive() and not sampIsDialogActive() and not isPauseMenuActive() then
-			if isKeyDown(VK_OEM_PLUS) and time - tick.Keys.Plus > tick.Time.PlusMinus then
-				if ini.cheat.s_airbreak < 20 then ini.cheat.s_airbreak = ini.cheat.s_airbreak + 0.5 end
-				printStringNow('AirBreak: '..ini.cheat.s_airbreak, 500)
-				inicfg.save(ini, 'adminlite')
-				tick.Keys.Plus = os.clock() * 1000
-			elseif isKeyDown(VK_OEM_MINUS) and time - tick.Keys.Minus > tick.Time.PlusMinus then
-				if ini.cheat.s_airbreak > 0.5 then ini.cheat.s_airbreak = ini.cheat.s_airbreak - 0.5 end
-				printStringNow('AirBreak: '..ini.cheat.s_airbreak, 500)
-				inicfg.save(ini, 'adminlite')
-				tick.Keys.Minus = os.clock() * 1000
+			if isKeyDown(VK_W) then
+				airBrkCoords[1] = airBrkCoords[1] + ini.cheat.s_airbreak * math.sin(-math.rad(angle))
+				airBrkCoords[2] = airBrkCoords[2] + ini.cheat.s_airbreak * math.cos(-math.rad(angle))
+				if not isCharInAnyCar(playerPed) then setCharHeading(playerPed, angle)
+				else setCarHeading(storeCarCharIsInNoSave(playerPed), angle)
+				end
+			elseif isKeyDown(VK_S) then
+				airBrkCoords[1] = airBrkCoords[1] - ini.cheat.s_airbreak * math.sin(-math.rad(heading))
+				airBrkCoords[2] = airBrkCoords[2] - ini.cheat.s_airbreak * math.cos(-math.rad(heading))
+				if not isCharInAnyCar(playerPed) then setCharHeading(playerPed, angle)
+				else setCarHeading(storeCarCharIsInNoSave(playerPed), angle)
+				end
+			end
+			if isKeyDown(VK_A) then
+				airBrkCoords[1] = airBrkCoords[1] - ini.cheat.s_airbreak * math.sin(-math.rad(heading - 90))
+				airBrkCoords[2] = airBrkCoords[2] - ini.cheat.s_airbreak * math.cos(-math.rad(heading - 90))
+				if not isCharInAnyCar(playerPed) then setCharHeading(playerPed, angle)
+				else setCarHeading(storeCarCharIsInNoSave(playerPed), angle)
+				end
+			elseif isKeyDown(VK_D) then
+				airBrkCoords[1] = airBrkCoords[1] - ini.cheat.s_airbreak * math.sin(-math.rad(heading + 90))
+				airBrkCoords[2] = airBrkCoords[2] - ini.cheat.s_airbreak * math.cos(-math.rad(heading + 90))
+				if not isCharInAnyCar(playerPed) then setCharHeading(playerPed, angle)
+				else setCarHeading(storeCarCharIsInNoSave(playerPed), angle)
+				end
+			end
+			if isKeyDown(VK_UP) then airBrkCoords[3] = airBrkCoords[3] + ini.cheat.s_airbreak / 2.0 end
+			if isKeyDown(VK_DOWN) and airBrkCoords[3] > -95.0 then airBrkCoords[3] = airBrkCoords[3] - ini.cheat.s_airbreak / 2.0 end
+			if not isSampfuncsConsoleActive() and not sampIsChatInputActive() and not sampIsDialogActive() and not isPauseMenuActive() then
+				if isKeyDown(VK_OEM_PLUS) and time - tick.Keys.Plus > tick.Time.PlusMinus then
+					if ini.cheat.s_airbreak < 30 then ini.cheat.s_airbreak = ini.cheat.s_airbreak + 0.1 end
+					printStringNow('AirBreak: '..ini.cheat.s_airbreak, 500)
+					inicfg.save(ini, 'adminlite')
+					tick.Keys.Plus = os.clock() * 1000
+				elseif isKeyDown(VK_OEM_MINUS) and time - tick.Keys.Minus > tick.Time.PlusMinus then
+					if ini.cheat.s_airbreak > 0.2 then ini.cheat.s_airbreak = ini.cheat.s_airbreak - 0.1 end
+					printStringNow('AirBreak: '..ini.cheat.s_airbreak, 500)
+					inicfg.save(ini, 'adminlite')
+					tick.Keys.Minus = os.clock() * 1000
+				end
 			end
 		end
-	end
+	end	
 end
 
 function secondary_funcs()
@@ -1146,190 +918,37 @@ function secondary_funcs()
 	end
 end
 
-function fisheye()
-    while true do
-        wait(0)
-        if FishEye.v then 
-            if isCurrentCharWeapon(PLAYER_PED, 34) and isKeyDown(2) then
-                if not fe_locked then 
-                    cameraSetLerpFov(70.0, 70.0, 1000, 1)
-                    fe_locked = true
-                end
-            else
-                cameraSetLerpFov(101.0, 101.0, 1000, 1)
-                fe_locked = false
-            end
-        end
-    end
-end
-
-function fix_funcs()
-	local time = os.clock() * 1000 -- fix click warp
-	if time - tick.ClickWarp < 170 and not isCharInAnyCar(playerPed) then clearCharTasksImmediately(playerPed) end
-end
-
 function fps_correction()
 	return representIntAsFloat(readMemory(0xB7CB5C, 4, false))
-end
-
-function get_pickup_model(id, handle)
-  local stPickup = sampGetPickupPoolPtr()
-  local handle = id * 20
-  local result = handle + 61444
-  local result = result + stPickup
-  local modelid = readMemory(result, 4, true)
-  return modelid
-end
-
-function reload_setting()
-	thisScript():reload()
-end
-
---|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-function initializeRender()
-	font = renderCreateFont("Tahoma", 10, FCR_BOLD + FCR_BORDER)
-	font2 = renderCreateFont("Arial", 8, FCR_ITALICS + FCR_BORDER)
-end
---|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-function rotateCarAroundUpAxis(car, vec)
-	local mat = Matrix3X3(getVehicleRotationMatrix(car))
-	local rotAxis = Vector3D(mat.up:get())
-	vec:normalize()
-	rotAxis:normalize()
-	local theta = math.acos(rotAxis:dotProduct(vec))
-	if theta ~= 0 then
-	  rotAxis:crossProduct(vec)
-	  rotAxis:normalize()
-	  rotAxis:zeroNearZero()
-	  mat = mat:rotate(rotAxis, -theta)
-	end
-	setVehicleRotationMatrix(car, mat:get())
-  end
-  
-  function readFloatArray(ptr, idx)
-	return representIntAsFloat(readMemory(ptr + idx * 4, 4, false))
-  end
-  
-  function writeFloatArray(ptr, idx, value)
-	writeMemory(ptr + idx * 4, 4, representFloatAsInt(value), false)
-  end
-  
-  function getVehicleRotationMatrix(car)
-	local entityPtr = getCarPointer(car)
-	if entityPtr ~= 0 then
-	  local mat = readMemory(entityPtr + 0x14, 4, false)
-	  if mat ~= 0 then
-		local rx, ry, rz, fx, fy, fz, ux, uy, uz
-		rx = readFloatArray(mat, 0)
-		ry = readFloatArray(mat, 1)
-		rz = readFloatArray(mat, 2)
-		fx = readFloatArray(mat, 4)
-		fy = readFloatArray(mat, 5)
-		fz = readFloatArray(mat, 6)
-		ux = readFloatArray(mat, 8)
-		uy = readFloatArray(mat, 9)
-		uz = readFloatArray(mat, 10)
-		return rx, ry, rz, fx, fy, fz, ux, uy, uz
-	  end
-	end
-  end
-  
-  function setVehicleRotationMatrix(car, rx, ry, rz, fx, fy, fz, ux, uy, uz)
-	local entityPtr = getCarPointer(car)
-	if entityPtr ~= 0 then
-	  local mat = readMemory(entityPtr + 0x14, 4, false)
-	  if mat ~= 0 then
-		writeFloatArray(mat, 0, rx)
-		writeFloatArray(mat, 1, ry)
-		writeFloatArray(mat, 2, rz)
-		writeFloatArray(mat, 4, fx)
-		writeFloatArray(mat, 5, fy)
-		writeFloatArray(mat, 6, fz)
-		writeFloatArray(mat, 8, ux)
-		writeFloatArray(mat, 9, uy)
-		writeFloatArray(mat, 10, uz)
-	  end
-	end
-  end
-  
-  function getCarFreeSeat(car)
-	if doesCharExist(getDriverOfCar(car)) then
-	  local maxPassengers = getMaximumNumberOfPassengers(car)
-	  for i = 0, maxPassengers do
-		if isCarPassengerSeatFree(car, i) then
-		  return i + 1
-		end
-	  end
-	  return nil
-	else
-	  return 0
-	end
-  end
-  
-  function jumpIntoCar(car)
-	local seat = getCarFreeSeat(car)
-	if not seat then return false end
-	if seat == 0 then warpCharIntoCar(playerPed, car)
-	else warpCharIntoCarAsPassenger(playerPed, car, seat - 1)
-	end
-	restoreCameraJumpcut()
-	return true
-  end
-  
-  function teleportPlayer(x, y, z)
-	if isCharInAnyCar(playerPed) then setCharCoordinates(playerPed, x, y, z) end
-	setCharCoordinatesDontResetAnim(playerPed, x, y, z)
-  end
-  
-  function setCharCoordinatesDontResetAnim(char, x, y, z)
-	local ptr = getCharPointer(char) setEntityCoordinates(ptr, x, y, z)
-  end
-  
-  function setEntityCoordinates(entityPtr, x, y, z)
-	if entityPtr ~= 0 then
-	  local matrixPtr = readMemory(entityPtr + 0x14, 4, false)
-	  if matrixPtr ~= 0 then
-		local posPtr = matrixPtr + 0x30
-		writeMemory(posPtr + 0, 4, representFloatAsInt(x), false) -- X
-		writeMemory(posPtr + 4, 4, representFloatAsInt(y), false) -- Y
-		writeMemory(posPtr + 8, 4, representFloatAsInt(z), false) -- Z
-	  end
-	end
-  end
---|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
---| Cheat: FarChat |--
-function sampev.onPlayerChatBubble(id, col, dist, dur, msg)
-	if ini.cheat.farchat then
-		dist = 1488.0
-	else
-		dist = 50.0
-	end
 end
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 -->>| Local AutoLogin |<<--
 function sampev.onShowDialog(id, style, title, button1, button2, text) -- autologin
-	print(id, title)
+	-- print(id, title)
     --| Auto-Password |--
 	if ini.account.autoPass then
-		if id == 1 then
-			sampSendDialogResponse(0, 1, 1, tostring(ini.account.password, 256))
-			print('Sended!')
+		if id == 2 then
+			sampSendDialogResponse(2, 1, 1, tostring(ini.account.password, 256))
+			print('Pass Sended!')
+			return false
 		end
 	end
 	
     --| Auto-Alogin |--
-	-- if ini.account.autoAlogin then
-	-- 	function sampev.onServerMessage(color, text)
-	-- 		if text:find('Добро пожаловать на ') then
-	-- 			sampSendChat('/alogin')
-	-- 			sampAddChatMessage('Добро пожаловать на {ff4545}Radix Role Play', -1)
-	-- 		end
-	-- 	end
-	-- 	if id == 87 then
-	-- 		sampSendDialogResponse(87, 1, 1, ini.account.alogin)
-	-- 		return false
-	-- 	 end
-	-- end
+	if ini.account.autoAlogin then
+		function sampev.onServerMessage(color, text)
+			if text:find('{ffffff}World RolePlay{339999}') then
+				sampSendChat('/alogin')
+				sampAddChatMessage('{339999}Добро пожаловать на {ffffff}World RolePlay{339999}. Надеемся, вы хорошо проведёте время у нас.', -1)
+				print("Test-1116")
+			end
+		end
+		if id == 1227 then
+			sampSendDialogResponse(1227, 1, 1, ini.account.alogin, 256)
+			print('Admin-Pass Sended!')
+			return false
+		end
+	end
 end
 --|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
 -->>| Show Help Marker: '(?)' |<<--
